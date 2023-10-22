@@ -2,6 +2,7 @@
 #define ENCODER_H
 
 #include <stdint.h>
+#include <stdio.h>
 
 /**
  * @brief Representation of possible states for the 2-bit encoder.
@@ -12,10 +13,11 @@
  */
 typedef enum
 {
-  LOCKED,
-  TRANSIT,
-  OVEREXTENDED,
-  UNLOCKED
+  ENCODER_LOCKED,
+  ENCODER_TRANSIT,
+  ENCODER_OVEREXTENDED,
+  ENCODER_UNLOCKED,
+  ENCODER_ERROR
 } encoder_state_t;
 
 /**
@@ -40,4 +42,10 @@ encoder_state_t encoder_read(void);
  */
 encoder_state_t encoder_poll(void);
 
+/**
+ * @brief Return string corresponding to encoder value.
+ * @param val The encoder value
+ * @param str The array to stroe the str inside of.
+ */
+void encoder_to_string(encoder_state_t val, char * str);
 #endif

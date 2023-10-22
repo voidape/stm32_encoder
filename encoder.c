@@ -24,14 +24,16 @@ encoder_state_t encoder_read(void)
   switch (encoder_state)
   {
   case 0:
-    return LOCKED;
+    return ENCODER_LOCKED;
   case 1:
-    return TRANSIT;
+    return ENCODER_TRANSIT;
   case 2:
-    return OVEREXTENDED;
+    return ENCODER_OVEREXTENDED;
   case 3:
-    return UNLOCKED;
+    return ENCODER_UNLOCKED;
   }
+
+  return ENCODER_ERROR;
 }
 
 encoder_state_t encoder_poll(void)
@@ -42,4 +44,30 @@ encoder_state_t encoder_poll(void)
   encoder_disable();
 
   return res;
+}
+
+
+void encoder_to_string(encoder_state_t val, char * str)
+{
+  switch(val){
+    case ENCODER_LOCKED:
+      sprintf(str, "locked");
+    break;
+
+    case ENCODER_TRANSIT:
+      sprintf(str, "transit");
+    break;
+
+    case ENCODER_OVEREXTENDED:
+      sprintf(str, "overextended");
+    break;
+
+    case ENCODER_UNLOCKED:
+      sprintf(str, "unlocked");
+    break;
+
+    case ENCODER_ERROR:
+      sprintf(str, "error");
+    break;
+  }
 }
