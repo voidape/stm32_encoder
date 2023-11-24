@@ -11,14 +11,15 @@
  * TRANSIT = 0-90 degrees (bollard arm between locked and unlocked position)
  * OVEREXTENDED = 90-180 degrees (bollard arm is extended past the locked position)
  */
-typedef enum
+typedef uint8_t encoder_state_t;
+enum
 {
   ENCODER_LOCKED,
   ENCODER_TRANSIT,
   ENCODER_OVEREXTENDED,
   ENCODER_UNLOCKED,
   ENCODER_ERROR
-} encoder_state_t;
+};
 
 /**
  * @brief Enables the encoder. N.B. reading encoder value instantly after enabling it results in incorrect readings.
