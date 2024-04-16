@@ -16,8 +16,11 @@ void encoder_disable(void)
 
 encoder_state_t encoder_read(void)
 {
+  encoder_enable();
+  HAL_Delay(10);
   uint8_t k1 = (uint8_t)HAL_GPIO_ReadPin(ENCODER_K1_GPIO_Port, ENCODER_K1_Pin);
   uint8_t k2 = (uint8_t)HAL_GPIO_ReadPin(ENCODER_K2_GPIO_Port, ENCODER_K2_Pin);
+  encoder_disable();
 
   uint8_t encoder_state = (k1 << 1 | k2) & 0b11;
 
